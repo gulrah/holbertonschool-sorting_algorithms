@@ -1,0 +1,10 @@
+Bubble Sort Algorithm:
+
+in the best case: O(n)
+- In the best case, when the array is already sorted, Bubble Sort will iterate through the array once, checking for swaps, and terminate without any swaps.
+
+in the average case: O(n^2)
+- In the average case, Bubble Sort compares and swaps elements in each pass through the array, resulting in a time complexity proportional to the square of the number of elements.
+
+in the worst case: O(n^2)
+- In the worst case, when the array is in reverse order, Bubble Sort will perform maximum comparisons and swaps, resulting in a time complexity proportional to the square of the number of elements.
