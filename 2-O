@@ -1,0 +1,3 @@
+O(n^2)    // Best case: when the array is already sorted (but still requires comparisons)
+O(n^2)    // Average case: when each element has an equal probability of being the smallest
+O(n^2)    // Worst case: when the array is sorted in reverse order
