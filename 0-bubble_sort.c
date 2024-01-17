@@ -8,14 +8,10 @@
 void bubble_sort(int *array, size_t size)
 {
     size_t i, j;
-    int swapped;
 
-    i = 0;
-    while (i < size - 1)
+    for (i = 0; i < size - 1; i++)
     {
-        swapped = 0;
-        j = 0;
-        while (j < size - i - 1)
+        for (j = 0; j < size - i - 1; j++)
         {
             if (array[j] > array[j + 1])
             {
@@ -23,14 +19,8 @@ void bubble_sort(int *array, size_t size)
                 swap(&array[j], &array[j + 1]);
                 /* Print array after each swap */
                 print_array(array, size);
-                swapped = 1;
             }
-            j++;
         }
-        /* If no two elements were swapped by inner loop, the array is sorted */
-        if (swapped == 0)
-            break;
-        i++;
     }
 }
 
