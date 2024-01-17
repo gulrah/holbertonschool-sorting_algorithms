@@ -1,37 +1,34 @@
-#include <stdio.h>
 #include "sort.h"
 
 /**
- * selection_sort - Sorts an array of integers in ascending order using
- * the Selection sort algorithm.
- * @array: The array to be sorted.
- * @size: The size of the array.
+ * selection_sort - Sorts an array of integers in ascending order using Selection Sort
+ * @array: The array to be sorted
+ * @size: The size of the array
  */
-void selection_sort(int *array, size_t size) {
-    size_t current_position, unsorted_index, min_index;
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+void selection_sort(int *array, size_t size)
+{
+    size_t i, j, min_idx;
 
-    /* Check if the array is NULL or has less than 2 elements */
-    if (array == NULL || size < 2)
-        return;
-
-    /* Iterate through the array */
-    for (current_position = 0; current_position < size - 1; current_position++) {
-        min_index = current_position;
-
-        /* Find the index of the minimum element in the unsorted part of the array */
-        for (unsorted_index = current_position + 1; unsorted_index < size; unsorted_index++) {
-            if (array[unsorted_index] < array[min_index])
-                min_index = unsorted_index;
+    for (i = 0; i < size - 1; i++)
+    {
+        min_idx = i;
+        for (j = i + 1; j < size; j++)
+        {
+            if (array[j] < array[min_idx])
+                min_idx = j;
         }
 
-        /* If the minimum element is not at the current position, swap them */
-        if (min_index != current_position) {
-            /* Swap elements */
-            int temp = array[current_position];
-            array[current_position] = array[min_index];
-            array[min_index] = temp;
-
-            /* Print the array after each swap */
+        if (min_idx != i)
+        {
+            /* Swap elements if the minimum element is not at its correct position */
+            swap(&array[i], &array[min_idx]);
+            /* Print array after each swap */
             print_array(array, size);
         }
     }
