@@ -9,37 +9,36 @@
  * array: The array to be sorted
  * size: The size of the array
  */
-void bubble_sort(int *array, size_t size)
-{
-    size_t i, j;
-    int temp; /* Temporary variable for swapping */
-    int swapped; /* Flag to check if any swaps occurred in the current pass */
+void bubble_sort(int *array, size_t size) {
+    size_t pass = 0; /* Indicates how many passes have been made */
+    size_t unsorted_index = 0; /* Index for iterating through the unsorted part of the array */
 
-    /* Outer loop for each pass through the array */
-    for (i = 0; i < size - 1; i++)
-    {
-        swapped = 0; /* Initialize the swapped flag for each pass */
+    /* Keep looping until the entire array is sorted */
+    while (pass < size - 1) {
+        int swapped = 0; /* Flag to check if we made any swaps in this pass */
+        unsorted_index = 0; /* Start from the beginning of the unsorted part */
 
-        /* Inner loop to compare and swap adjacent elements */
-        for (j = 0; j < size - 1 - i; j++)
-        {
-            /* Compare adjacent elements */
-            if (array[j] > array[j + 1])
-            {
-                /* Swap the elements if they are in the wrong order */
-                temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
+        /* Go through the array and compare adjacent elements in the unsorted part */
+        while (unsorted_index < size - 1 - pass) {
+            /* If the current element is greater than the next one, swap them */
+            if (array[unsorted_index] > array[unsorted_index + 1]) {
+                int temp = array[unsorted_index];
+                array[unsorted_index] = array[unsorted_index + 1];
+                array[unsorted_index + 1] = temp;
 
-                swapped = 1; /* Set the swapped flag to true */
+                swapped = 1; /* Indicate that we made a swap */
 
                 /* Print the array after each swap */
                 print_array(array, size);
             }
+
+            unsorted_index++; /* Move to the next element in the unsorted part */
         }
 
-        /* If no swaps occurred in the pass, the array is already sorted */
+        /* If we didn't make any swaps, the array is already sorted */
         if (swapped == 0)
             break;
+
+        pass++; /* Move to the next pass */
     }
 }

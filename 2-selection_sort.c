@@ -7,27 +7,29 @@
  * @array: The array to be sorted.
  * @size: The size of the array.
  */
-void selection_sort(int *array, size_t size)
-{
-size_t i, j, min_idx;
-  if (array == NULL || size < 2)
+void selection_sort(int *array, size_t size) {
+    size_t current_position, unsorted_index, min_index;
+
+    /* Check if the array is NULL or has less than 2 elements */
+    if (array == NULL || size < 2)
         return;
 
-    for (i = 0; i < size - 1; i++)
-    {
-        min_idx = i;
-        for (j = i + 1; j < size; j++)
-        {
-            if (array[j] < array[min_idx])
-                min_idx = j;
+    /* Iterate through the array */
+    for (current_position = 0; current_position < size - 1; current_position++) {
+        min_index = current_position;
+
+        /* Find the index of the minimum element in the unsorted part of the array */
+        for (unsorted_index = current_position + 1; unsorted_index < size; unsorted_index++) {
+            if (array[unsorted_index] < array[min_index])
+                min_index = unsorted_index;
         }
 
-        if (min_idx != i)
-        {
+        /* If the minimum element is not at the current position, swap them */
+        if (min_index != current_position) {
             /* Swap elements */
-            int temp = array[i];
-            array[i] = array[min_idx];
-            array[min_idx] = temp;
+            int temp = array[current_position];
+            array[current_position] = array[min_index];
+            array[min_index] = temp;
 
             /* Print the array after each swap */
             print_array(array, size);
