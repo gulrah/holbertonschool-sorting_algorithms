@@ -66,3 +66,15 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 
     return (i + 1);
 }
+
+/**
+ * swap - Swaps the values of two integers
+ * @a: Pointer to the first integer
+ * @b: Pointer to the second integer
+ */
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
