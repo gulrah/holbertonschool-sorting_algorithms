@@ -1,37 +1,47 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - Sorts doubly in ascending order using Insertion sort
- * @list: Pointer to the head of the linked list
+ * swap_dll - Swap two elements in a double linked list
+ * @hi: The higher element
+ * @lo: The lower element
+ */
+void swap_dll(listint_t *hi, listint_t *lo)
+{
+	hi->next = lo->next;
+
+	if (hi->prev)
+		hi->prev->next = lo;
+	if (lo->next)
+		lo->next->prev = hi;
+
+	lo->next = hi;
+	lo->prev = hi->prev;
+	hi->prev = lo;
+}
+
+/**
+ * insertion_sort_list - Implement insertion sort algorithm
+ * @list: The list to sort
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current, *temp;
+	listint_t *tmp = NULL, *tmp2 = NULL;
 
-	if (list == NULL || *list == NULL)
+	if (list == NULL)
 		return;
 
-	current = (*list)->next;
-
-	while (current != NULL)
+	for (tmp = *list; tmp; tmp = tmp->next)
 	{
-		temp = current;
-		while (temp->prev != NULL && temp->n < temp->prev->n)
-		{
-			temp->prev->next = temp->next;
-			if (temp->next != NULL)
-				temp->next->prev = temp->prev;
-			temp->next = temp->prev;
-			temp->prev = temp->prev->prev;
-			temp->next->prev = temp;
+		tmp2 = tmp;
 
-			if (temp->prev == NULL)
-				*list = temp;
-			else
-				temp->prev->next = temp;
+		while (tmp2->prev && (tmp2->n < tmp2->prev->n))
+		{
+			swap_dll(tmp2->prev, tmp2);
+
+			if (!tmp2->prev)
+				*list = tmp2;
 
 			print_list(*list);
 		}
-		current = current->next;
 	}
 }
